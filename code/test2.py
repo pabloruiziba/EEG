@@ -103,16 +103,14 @@ for i in x:
 
 #print(freq,file=f2)    
 
-'''
 ### GOOD CODE
 for i, x in enumerate(freq2):
     print(freq2[i][0],freq2[i][1],file=f2)
 
 print("Frequencies", len(freq2))
 #print("Frequencies", np.size(freq))
-'''
 
 #print(f.getSignalLabels())
 
 f1.close()
-f2.close()
+f2.close()'''
