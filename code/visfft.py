@@ -43,15 +43,15 @@ def filter(signal, fT, plotName,save):
     
     #pensar millor
     #filtre dinamic
-    cut_f_signal[(W>1)] = 0
-    cut_f_signal[(W<0)] = 0
+    cut_f_signal[(W>12)] = 0
+    cut_f_signal[(W<11)] = 0
     
     cut_signal = irfft(cut_f_signal)
 
     import pylab as plt
     #f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
     #dibuixa el proces de filtratge
-    if False:
+    if True:
         fig1 = plt.figure()
         ax1 = fig1.add_subplot(111)
         ax1.plot(time,signal)
