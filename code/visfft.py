@@ -29,6 +29,59 @@ def transform(signal,fT,plotName,save):
         plt.close(fig1)
     
     return yf
+
+def filter(signal, fT, plotName,save):
+    import numpy as np
+    from scipy.fftpack import rfft, irfft, fftfreq
+
+    time   = np.linspace(0,fT,len(signal))
+    W = fftfreq(signal.size, d=fT/len(signal))
+    f_signal = rfft(signal)
+
+    # If our original signal time was in seconds, this is now in Hz    
+    cut_f_signal = f_signal.copy()
+    
+    #pensar millor
+    #filtre dinamic
+    cut_f_signal[(W>1)] = 0
+    cut_f_signal[(W<0)] = 0
+    
+    cut_signal = irfft(cut_f_signal)
+
+    import pylab as plt
+    #f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    #dibuixa el proces de filtratge
+    if False:
+        fig1 = plt.figure()
+        ax1 = fig1.add_subplot(111)
+        ax1.plot(time,signal)
+        ax1.plot(time,cut_signal)
+        plt.savefig(plotName.split(".")[0]+"_1"+plotName.split(".")[1])
+        plt.close(fig1)
+
+        fig1 = plt.figure()
+        ax1 = fig1.add_subplot(111)
+        ax1.plot(W,f_signal)
+        plt.savefig(plotName.split(".")[0]+"_2"+plotName.split(".")[1])
+        plt.close(fig1)
+
+        fig1 = plt.figure()
+        ax1 = fig1.add_subplot(111)
+        ax1.plot(W,cut_f_signal)
+        plt.savefig(plotName.split(".")[0]+"_3"+plotName.split(".")[1])
+        plt.close(fig1)
+    
+    fig1 = plt.figure()
+    ax1 = fig1.add_subplot(111)
+    ax1.plot(time,cut_signal)
+    plt.savefig(plotName.split(".")[0]+"_4"+plotName.split(".")[1])
+    plt.close(fig1)
+
+    #ax2.plot(W,f_signal)
+    #ax3.plot(W,cut_f_signal)
+    #ax4.plot(time,cut_signal)
+    #plt.savefig(plotName)
+    #plt.close(f)
     
 def main():
     from os.path import isfile, join
@@ -40,11 +93,12 @@ def main():
         return
 
     plot=True
-    pathPlots = "plots/"
+    pathPlots = "filter/"
     if not os.path.exists(pathPlots):
         os.makedirs(pathPlots)
 
     vDataFile = [pathData + f for f in listdir(pathData) if isfile(join(pathData, f)) and f[-4:]==".edf"]
+    
     for dataFile in vDataFile:
         with pyedflib.EdfReader(dataFile) as f:
             pathPlotsFile = pathPlots + dataFile.split(".")[0].split("/")[-1] +"/"
@@ -53,13 +107,12 @@ def main():
                 os.makedirs(pathPlotsFile)
             
             #no trobo variable num canals en f
-            for channel in range(1000):
-                try:
-                    signal = f.readSignal(channel)
-                    duration = f.file_duration
-                    plotName = pathPlotsFile + f.getLabel(channel) + ".png" 
-                    transform(signal, duration, plotName,plot)
-                except:
-                    break
+            for channel in range(64):
+            
+                signal = f.readSignal(channel)
+                duration = f.file_duration
+                plotName = pathPlotsFile + f.getLabel(channel) + ".png" 
+                filter(signal, duration, plotName,plot)
+                
 if __name__ == '__main__':
     main()
