@@ -52,6 +52,12 @@ if __name__ == '__main__':
     print("transducer: %s" % f.getTransducer(channel))
     print("samplefrequency: %f" % f.getSampleFrequency(channel))
 
+    print(f.read_annotation())
+
+
+
+
+'''
 # Define signal.
 Fs = f.getNSamples()[channel]  # Number samples
 Tfin = f.getFileDuration() # Duration

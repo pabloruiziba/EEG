@@ -1,0 +1,25 @@
+Deco.pdf
+	El model es per a cervells en estat de repos.
+	Els nostres fitxers tenen un anotacions t0,t1,t2 les quals volen dir (tret de la seva web)
+
+	    T0 corresponds to rest
+	    T1 corresponds to onset of motion (real or imagined) of
+	        the left fist (in runs 3, 4, 7, 8, 11, and 12)
+	        both fists (in runs 5, 6, 9, 10, 13, and 14)
+	    T2 corresponds to onset of motion (real or imagined) of
+	        the right fist (in runs 3, 4, 7, 8, 11, and 12)
+	        both feet (in runs 5, 6, 9, 10, 13, and 14)
+
+	El primer que he mirat estaba a T0 per tant tenim data
+
+	He fet una llegida del model pagina 16, i apliquen un soroll blanc gausia aditiu
+
+	El treball consistiria en trobar els parametres del model que ajustin be la data,
+		per cada señal trobar els parametres
+	Simular amb els parametres,
+	
+	Si tinguesim temps 
+		Intrudir activitat al model
+		Ajustarlo amb la data que tenim
+		Simular-lo
+

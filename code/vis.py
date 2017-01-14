@@ -7,8 +7,9 @@ def filter(signal, fT):
     W = fftfreq(signal.size, d=float(fT)/len(signal))
     f_signal = rfft(signal)
     cut_f_signal = f_signal.copy()
-    cut_f_signal[(W<11) &(W>12)] = 0
-
+    cut_f_signal[(W<11)] = 0
+    cut_f_signal[(W>12)] = 0
+    
     return [np.linspace(0,fT,len(signal)),irfft(cut_f_signal)]
 
 def main():
