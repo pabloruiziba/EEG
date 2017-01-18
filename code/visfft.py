@@ -137,14 +137,14 @@ class Point:
         self.name = name
         
     def __str__(self):
-        print(self.name)
+        return str(self.name)
    
    
     def __repr__(self):
-        print(self.name)
+        return str(self.name)
    
-    def __repr__(self):
-        return str(self.coords)
+    #def __repr__(self):
+    #    return str(self.coords)
 
 class Cluster:
     '''
@@ -387,10 +387,11 @@ def main():
             upper = 200
             
             # The K in k-means. How many clusters do we assume exist?
-            num_clusters = 10
+            num_clusters = 6
             
             # When do we say the optimization has 'converged' and stop updating clusters
-            opt_cutoff = 0.1
+            
+            opt_cutoff = 0.0001
             
             # Generate some points
 #            points = [makeRandomPoint(dimensions, lower, upper) for i in xrange(num_points)]
